@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gr691_msiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Teacher_ID" Type="Int32" />
+    <Property Name="Subject_ID" Type="Int32" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Appointme__Subje__4460231C" FromRole="Appointment" ToRole="Subject" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__Appointme__Teach__436BFEE3" FromRole="Appointment" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Final_Mark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student_ID" Type="Int32" />
+    <Property Name="Subject_ID" Type="Int32" />
+    <Property Name="FMark" Type="Int32" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Final_Mar__Subje__46486B8E" FromRole="Final_Mark" ToRole="Subject" />
+    <NavigationProperty Name="Student" Relationship="gr691_msiModel.FK__Final_Mar__Stude__45544755" FromRole="Final_Mark" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Homework">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject_ID" Type="Int32" />
+    <Property Name="Teacher_ID" Type="Int32" />
+    <Property Name="Task" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Homework__Subjec__4277DAAA" FromRole="Homework" ToRole="Subject" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__Homework__Teache__4183B671" FromRole="Homework" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Mark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student_ID" Type="Int32" />
+    <Property Name="Subject_ID" Type="Int32" />
+    <Property Name="Mark1" Type="Int32" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Theme" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Mark__Subject_ID__408F9238" FromRole="Mark" ToRole="Subject" />
+    <NavigationProperty Name="Student" Relationship="gr691_msiModel.FK__Mark__Student_ID__3F9B6DFF" FromRole="Mark" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__Role_ID__3EA749C6" FromRole="Role" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__Subje__4460231C" FromRole="Subject" ToRole="Appointment" />
+    <NavigationProperty Name="Final_Mark" Relationship="Self.FK__Final_Mar__Subje__46486B8E" FromRole="Subject" ToRole="Final_Mark" />
+    <NavigationProperty Name="Homework" Relationship="Self.FK__Homework__Subjec__4277DAAA" FromRole="Subject" ToRole="Homework" />
+    <NavigationProperty Name="Mark" Relationship="Self.FK__Mark__Subject_ID__408F9238" FromRole="Subject" ToRole="Mark" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="First_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Middle_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__Teach__436BFEE3" FromRole="Teacher" ToRole="Appointment" />
+    <NavigationProperty Name="Homework" Relationship="Self.FK__Homework__Teache__4183B671" FromRole="Teacher" ToRole="Homework" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Role_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Users__Role_ID__3EA749C6" FromRole="Users" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK__Appointme__Subje__4460231C">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__Teach__436BFEE3">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Teacher_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Final_Mar__Subje__46486B8E">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Final_Mark" Type="Self.Final_Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Final_Mark">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homework__Subjec__4277DAAA">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homework__Teache__4183B671">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="Teacher_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mark__Subject_ID__408F9238">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__Role_ID__3EA749C6">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gr691_msiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appointment" EntityType="Self.Appointment" />
+    <EntitySet Name="Final_Mark" EntityType="Self.Final_Mark" />
+    <EntitySet Name="Homework" EntityType="Self.Homework" />
+    <EntitySet Name="Mark" EntityType="Self.Mark" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Appointme__Subje__4460231C" Association="Self.FK__Appointme__Subje__4460231C">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__Teach__436BFEE3" Association="Self.FK__Appointme__Teach__436BFEE3">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Final_Mar__Subje__46486B8E" Association="Self.FK__Final_Mar__Subje__46486B8E">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Final_Mark" EntitySet="Final_Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homework__Subjec__4277DAAA" Association="Self.FK__Homework__Subjec__4277DAAA">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homework__Teache__4183B671" Association="Self.FK__Homework__Teache__4183B671">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mark__Subject_ID__408F9238" Association="Self.FK__Mark__Subject_ID__408F9238">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__Role_ID__3EA749C6" Association="Self.FK__Users__Role_ID__3EA749C6">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Class" EntityType="gr691_msiModel.Class" />
+    <EntitySet Name="Student" EntityType="gr691_msiModel.Student" />
+    <AssociationSet Name="FK__Student__Class__4A18FC72" Association="gr691_msiModel.FK__Student__Class__4A18FC72">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Final_Mar__Stude__45544755" Association="gr691_msiModel.FK__Final_Mar__Stude__45544755">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Final_Mark" EntitySet="Final_Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mark__Student_ID__3F9B6DFF" Association="gr691_msiModel.FK__Mark__Student_ID__3F9B6DFF">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Student" Relationship="gr691_msiModel.FK__Student__Class__4A18FC72" FromRole="Class" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="First_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Middle_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Class_ID" Type="Int32" />
+    <NavigationProperty Name="Class" Relationship="gr691_msiModel.FK__Student__Class__4A18FC72" FromRole="Student" ToRole="Class" />
+    <NavigationProperty Name="Final_Mark" Relationship="gr691_msiModel.FK__Final_Mar__Stude__45544755" FromRole="Student" ToRole="Final_Mark" />
+    <NavigationProperty Name="Mark" Relationship="gr691_msiModel.FK__Mark__Student_ID__3F9B6DFF" FromRole="Student" ToRole="Mark" />
+  </EntityType>
+  <Association Name="FK__Student__Class__4A18FC72">
+    <End Type="gr691_msiModel.Class" Role="Class" Multiplicity="0..1" />
+    <End Type="gr691_msiModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Final_Mar__Stude__45544755">
+    <End Type="gr691_msiModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="gr691_msiModel.Final_Mark" Role="Final_Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Final_Mark">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mark__Student_ID__3F9B6DFF">
+    <End Type="gr691_msiModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="gr691_msiModel.Mark" Role="Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

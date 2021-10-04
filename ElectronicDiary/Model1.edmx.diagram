@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4882d7ca0f694b2d94102c7c9272c077" Name="Diagram1">
+        <EntityTypeShape EntityType="gr691_msiModel.Appointment" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Final_Mark" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Homework" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Mark" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Role" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Subject" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Teacher" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="gr691_msiModel.Users" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="gr691_msiModel.FK__Appointme__Subje__4460231C" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Appointme__Teach__436BFEE3" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Final_Mar__Subje__46486B8E" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Homework__Subjec__4277DAAA" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Homework__Teache__4183B671" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Mark__Subject_ID__408F9238" ManuallyRouted="false" />
+        <AssociationConnector Association="gr691_msiModel.FK__Users__Role_ID__3EA749C6" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="gr691_msiModel.Class" Width="1.5" PointX="8.375" PointY="4.375" />
+        <EntityTypeShape EntityType="gr691_msiModel.Student" Width="1.5" PointX="10.625" PointY="4" />
+        <AssociationConnector Association="gr691_msiModel.FK__Student__Class__4A18FC72" />
+        <AssociationConnector Association="gr691_msiModel.FK__Final_Mar__Stude__45544755" />
+        <AssociationConnector Association="gr691_msiModel.FK__Mark__Student_ID__3F9B6DFF" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

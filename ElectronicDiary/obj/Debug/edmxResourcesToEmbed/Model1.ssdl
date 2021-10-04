@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище gr691_msiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Teacher_ID" Type="int" />
+    <Property Name="Subject_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="Final_Mark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_ID" Type="int" />
+    <Property Name="Subject_ID" Type="int" />
+    <Property Name="FMark" Type="int" />
+  </EntityType>
+  <EntityType Name="Homework">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject_ID" Type="int" />
+    <Property Name="Teacher_ID" Type="int" />
+    <Property Name="Task" Type="nvarchar" MaxLength="250" />
+    <Property Name="Date" Type="nvarchar" MaxLength="10" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_ID" Type="int" />
+    <Property Name="Subject_ID" Type="int" />
+    <Property Name="Mark" Type="int" />
+    <Property Name="Date" Type="nvarchar" MaxLength="10" />
+    <Property Name="Theme" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Last_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="First_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Middle_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Class_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Last_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="First_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Middle_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="25" />
+    <Property Name="Password" Type="nvarchar" MaxLength="25" />
+    <Property Name="Role_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Appointme__Subje__4460231C">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__Teach__436BFEE3">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Teacher_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Final_Mar__Stude__45544755">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Final_Mark" Type="Self.Final_Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Final_Mark">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Final_Mar__Subje__46486B8E">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Final_Mark" Type="Self.Final_Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Final_Mark">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homework__Subjec__4277DAAA">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homework__Teache__4183B671">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="Teacher_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mark__Student_ID__3F9B6DFF">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mark__Subject_ID__408F9238">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="Subject_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Class__4A18FC72">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__Role_ID__3EA749C6">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище gr691_msiModelContainer">
+    <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Final_Mark" EntityType="Self.Final_Mark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Homework" EntityType="Self.Homework" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Appointme__Subje__4460231C" Association="Self.FK__Appointme__Subje__4460231C">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__Teach__436BFEE3" Association="Self.FK__Appointme__Teach__436BFEE3">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Final_Mar__Stude__45544755" Association="Self.FK__Final_Mar__Stude__45544755">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Final_Mark" EntitySet="Final_Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Final_Mar__Subje__46486B8E" Association="Self.FK__Final_Mar__Subje__46486B8E">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Final_Mark" EntitySet="Final_Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homework__Subjec__4277DAAA" Association="Self.FK__Homework__Subjec__4277DAAA">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homework__Teache__4183B671" Association="Self.FK__Homework__Teache__4183B671">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mark__Student_ID__3F9B6DFF" Association="Self.FK__Mark__Student_ID__3F9B6DFF">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mark__Subject_ID__408F9238" Association="Self.FK__Mark__Subject_ID__408F9238">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Class__4A18FC72" Association="Self.FK__Student__Class__4A18FC72">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__Role_ID__3EA749C6" Association="Self.FK__Users__Role_ID__3EA749C6">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

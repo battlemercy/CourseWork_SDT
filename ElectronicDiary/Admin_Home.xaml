@@ -1,0 +1,118 @@
+﻿<Window x:Class="ElectronicDiary.Admin_Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElectronicDiary"
+        mc:Ignorable="d"
+        Title="Электронный дневник" Width="1057" Height="510.7" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TabControl Margin="0,1,0,0" Background="#FFFFFCFC">
+            <TabItem Header="Пользователи">
+                <Canvas Margin="0,0,-9,0">
+                    <DataGrid Name="Table_User" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="600" FontSize="12" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Login}" Header="Логин" Width="160"/>
+                            <DataGridTextColumn Binding="{Binding Role.Name}" Header="Роль" Width="160"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox  Name="User_login" materialDesign:HintAssist.Hint="Логин" TextWrapping="Wrap" Width="142" Canvas.Left="734" Canvas.Top="152"/>
+                    <TextBox  Name="User_password" materialDesign:HintAssist.Hint="Пароль" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="187"/>
+                    <ComboBox  Name="Cb_U_Role" materialDesign:HintAssist.Hint="Роль" Canvas.Left="734" Canvas.Top="230" Width="144" DisplayMemberPath="Name"/>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="630" Canvas.Top="349" Click="User_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="902" Canvas.Top="349" Click="User_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="766" Canvas.Top="349" Click="User_Delete"/>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Преподаватели">
+                <Canvas>
+                    <DataGrid Name="Table_Teacher" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="600" FontSize="12" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Last_Name}" Header="Фамилия" Width="160"/>
+                            <DataGridTextColumn Binding="{Binding First_Name}" Header="Имя" Width="110"/>
+                            <DataGridTextColumn Binding="{Binding Middle_Name}" Header="Отчество" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Telephone}" Header="Номер телефона" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox  Name="Teacher_last" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Фамилия" TextWrapping="Wrap" Width="142" Canvas.Left="734" Canvas.Top="152"/>
+                    <TextBox  Name="Teacher_first" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Имя" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="187"/>
+                    <TextBox  Name="Teacher_middle" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Отчество" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="221"/>
+                    <TextBox  Name="Teacher_telephone" materialDesign:HintAssist.Hint="Номер телефона" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="256"/>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="630" Canvas.Top="349" Click="Teacher_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="902" Canvas.Top="349" Click="Teacher_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="766" Canvas.Top="349" Click="Teacher_Delete"/>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Предметы">
+                <Canvas>
+                    <DataGrid Name="Table_Subject" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="600" FontSize="12">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Наименование предмета" Width="200" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox  Name="Subject_name" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Название предмета" TextWrapping="Wrap" Width="142" Canvas.Left="736" Canvas.Top="174"/>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="630" Canvas.Top="313" Click="Subject_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="902" Canvas.Top="313" Click="Subject_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="766" Canvas.Top="313" Click="Subject_Delete"/>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Назначения">
+                <Canvas>
+                    <DataGrid Name="Table_Appointment" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="600" FontSize="12" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Teacher.Last_Name}" Header="Учитель" Width="260"/>
+                            <DataGridTextColumn Binding="{Binding Subject.Name}" Header="Предмет" Width="300"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="635" Canvas.Top="323" Click="Appointment_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="907" Canvas.Top="323" Click="Appointment_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="771" Canvas.Top="323" Click="Appointment_Delete"/>
+                    <ComboBox  Name="Cb_A_Teacher" materialDesign:HintAssist.Hint="Учитель" Canvas.Left="652" Canvas.Top="153" Width="141">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                     <Run Text="{Binding Last_Name}"/>
+                                     <Run Text="{Binding First_Name}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox  Name="Cb_A_Subject" materialDesign:HintAssist.Hint="Предмет" Canvas.Left="826" Canvas.Top="153" Width="141" DisplayMemberPath="Name"/>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Ученики">
+                <Canvas>
+                    <DataGrid Name="Table_Student" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="600" FontSize="12" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Last_Name}" Header="Фамилия" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding First_Name}" Header="Имя" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Middle_Name}" Header="Отчество" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Class.Name}" Header="Класс" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="635" Canvas.Top="323" Click="Student_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="907" Canvas.Top="323" Click="Student_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="771" Canvas.Top="323" Click="Student_Delete"/>
+                    <TextBox  Name="Student_Last_Name" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Фамилия" TextWrapping="Wrap" Width="142" Canvas.Left="734" Canvas.Top="152"/>
+                    <TextBox  Name="Student_First_Name" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Имя" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="187"/>
+                    <TextBox  Name="Student_Middle_Name" PreviewTextInput="Word_Check" materialDesign:HintAssist.Hint="Отчество" TextWrapping="Wrap"  Width="142" Canvas.Left="734" Canvas.Top="221"/>
+                    <ComboBox  Name="Cb_S_Class" materialDesign:HintAssist.Hint="Класс" Canvas.Left="734" Canvas.Top="262" Width="141" DisplayMemberPath="Name"/>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Учебные классы">
+                <Canvas>
+                    <DataGrid Name="Table_Class" HorizontalAlignment="Left" Height="451" AutoGenerateColumns="False" VerticalAlignment="Top" Width="630" FontSize="12" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}"  Header="Наименование класса" Width="160"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Height="28" Width="112" Canvas.Left="646" Canvas.Top="349" Click="Class_Insert"/>
+                    <Button Content="Изменить" Height="28" Width="112" Canvas.Left="918" Canvas.Top="349" Click="Class_Update"/>
+                    <Button Content="Удалить" Height="28" Width="112" Canvas.Left="782" Canvas.Top="349" Click="Class_Delete"/>
+                    <TextBox  Name="Class_Name" materialDesign:HintAssist.Hint="Название класса" TextWrapping="Wrap" Width="142" Canvas.Left="734" Canvas.Top="152"/>
+                </Canvas>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
